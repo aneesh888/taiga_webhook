@@ -26,5 +26,10 @@ def webhook():
         abort(400)
 
 
+@app.route('/', methods=['GET'])
+def index():
+    return jsonify({'status': 'success'}), 200
+
+
 if __name__ == '__main__':
     app.run()
