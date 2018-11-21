@@ -9,6 +9,11 @@ app = Flask(__name__)
 authorised_clients = {}
 
 
+def verify_signature(key, data, signature):
+    mac = hmac.new(key.encode("utf-8"), msg=data, digestmod=hashlib.sha1)
+    return mac.hexdigest() == signature
+
+
 @app.route('/webhook', methods=['GET', 'POST'])
 def webhook():
     if request.method == 'GET':
